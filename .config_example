@@ -1,0 +1,30 @@
+# Common backup settings
+BACKUPS_DIR=/home/username/backups
+BACKUP_TIMEOUT=3600
+BACKUP_ARCHIVE_NAME_PREFIX=dump
+
+PG_HOST=localhost
+PG_PORT=5432
+PG_USER=username
+PG_DATABASE=username
+
+# Backup from docker container
+DOCKER_MODE_ON=True
+DOCKER_CONTAINER_NAME=e1871c7467a3
+
+# S3 storage support
+S3_ON=True
+S3_ACCESS_KEY_ID=7LOL44XC5O32A23
+S3_SECRET_KEY=Lz7DnFEN5FvaoLOLTbHY0yzU5cb2SsB9hrzbMUuL
+S3_ENDPOINT_URL=https://s3.us-west-1.wasabisys.com
+S3_BUCKET_NAME=backups
+S3_PATH=backups/
+
+# Email report
+EMAIL_REPORT_ON=True
+EMAIL_HOST=smtp.yandex.ru
+EMAIL_PORT=465
+EMAIL_HOST_USER=smtpemail@smtpemail.ru
+EMAIL_HOST_PASSWORD=ps2fv1dlf3
+EMAIL_SEND_TO=admin@yandex.ru
+EMAIL_SUBJECT=Backup report for my database
