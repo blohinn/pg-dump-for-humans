@@ -28,3 +28,10 @@ EMAIL_HOST_USER=smtpemail@smtpemail.ru
 EMAIL_HOST_PASSWORD=ps2fv1dlf3
 EMAIL_SEND_TO=admin@yandex.ru
 EMAIL_SUBJECT=Backup report for my database
+
+# SCP support
+SCP_ON=False
+SCP_REMOTE_HOST=222.132.45.12
+SCP_REMOTE_PORT=22
+SCP_REMOTE_USER=username
+SCP_REMOTE_DIR=/home/username/backups

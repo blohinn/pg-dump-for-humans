@@ -57,6 +57,18 @@ def push_to_s3(backup_save_path, filename):
     s3.upload_file(backup_save_path, config['S3_BUCKET_NAME'], get_s3_path(filename))
 
 
+def copy_to_remote_host(backup_save_path):
+    command = 'scp -P {} {} {}@{}:{}'.format(
+        config['SCP_REMOTE_PORT'],
+        backup_save_path,
+        config['SCP_REMOTE_HOST'],
+        config['SCP_REMOTE_USER'],
+        config['SCP_REMOTE_DIR'],
+    )
+    ps = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    return ps.communicate()[0]  # stdout output
+
+
 def get_backup_archive_name():
     return '{}_{}.gz'.format(
         config['BACKUP_ARCHIVE_NAME_PREFIX'],
@@ -148,6 +160,11 @@ if __name__ == '__main__':
             ))
         except Exception as e:
             logger.exception("Failed pushing to s3:")
+
+    if config['SCP_ON']:
+        # copy_to_remote_host(backup_save_path)
+        # todo
+        pass
 
     logger.info('End backup pipeline.')
 

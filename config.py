@@ -32,4 +32,10 @@ def get_config(config_path):
         'EMAIL_HOST_PASSWORD': env('EMAIL_HOST_PASSWORD'),
         'EMAIL_SEND_TO': env('EMAIL_SEND_TO'),
         'EMAIL_SUBJECT': env('EMAIL_SUBJECT'),
+
+        'SCP_ON': env.bool('SCP_ON', default=False),
+        'SCP_REMOTE_HOST': env('SCP_REMOTE_HOST'),
+        'SCP_REMOTE_PORT': int(env('SCP_REMOTE_PORT', default=22)),
+        'SCP_REMOTE_USER': env('SCP_REMOTE_USER'),
+        'SCP_REMOTE_DIR': env('SCP_REMOTE_DIR'),
     }
