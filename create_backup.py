@@ -61,8 +61,8 @@ def copy_to_remote_host(backup_save_path):
     command = 'scp -P {} {} {}@{}:{}'.format(
         config['SCP_REMOTE_PORT'],
         backup_save_path,
-        config['SCP_REMOTE_HOST'],
         config['SCP_REMOTE_USER'],
+        config['SCP_REMOTE_HOST'],
         config['SCP_REMOTE_DIR'],
     )
     ps = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -162,9 +162,26 @@ if __name__ == '__main__':
             logger.exception("Failed pushing to s3:")
 
     if config['SCP_ON']:
-        # copy_to_remote_host(backup_save_path)
-        # todo
-        pass
+        # TODO: Check connection before run scp command
+        logger.info('Starting copy backup to {}@{}:{} remote host (scp).'.format(
+            config['SCP_REMOTE_USER'],
+            config['SCP_REMOTE_HOST'],
+            config['SCP_REMOTE_DIR'],
+        ))
+        res = copy_to_remote_host(backup_save_path)
+        if not bool(res):
+            logger.info('Success copied backup to {}@{}:{} remote host (scp).'.format(
+                config['SCP_REMOTE_USER'],
+                config['SCP_REMOTE_HOST'],
+                config['SCP_REMOTE_DIR'],
+            ))
+        else:
+            logger.error('Failed copy backup to {}@{}:{} remote host (scp): {}'.format(
+                config['SCP_REMOTE_USER'],
+                config['SCP_REMOTE_HOST'],
+                config['SCP_REMOTE_DIR'],
+                str(res),
+            ))
 
     logger.info('End backup pipeline.')
 
